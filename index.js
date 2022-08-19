@@ -61,16 +61,16 @@ const game = () => {
       }
       alert(`user: ${userScore} computer: ${computerScore}`);
       i++;
+    } 
+    if(userPrompt==null){
+        break;
     } else {
       alert("Enter rock, paper or scissors");
     }
   }
   if (userScore > computerScore) {
     alert(`You won ${userScore}/${computerScore}`);
-  }
-  if (computerScore > userScore) {
-    alert(`You lost ${userScore}/${computerScore}`);
   } else {
-    alert(`You tied ${userScore}/${computerScore}`);
+    alert(`You lost ${userScore}/${computerScore}`);
   }
 };
