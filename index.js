@@ -1,11 +1,30 @@
 const choices = ["rock", "paper", "scissors"];
+var limit = 5
+
 const computerChoose = () =>
   choices[Math.floor(Math.random() * choices.length)];
+
 const updateScore = () => {
   document.getElementById("userScore").innerHTML = score.user;
   document.getElementById("computerScore").innerHTML = score.computer;
 }
+
+const gameOver = () => {
+  if(score.user >= 5 || score.computer >= 5) {
+    if(score.user > score.computer) {
+      alert(`you win ${score.user} - ${score.computer}`)
+      score={user: 0, computer: 0};
+      updateScore()
+    } else {
+      alert(`you lose ${score.user} - ${score.computer}`);
+      score={user: 0, computer: 0};
+      updateScore()
+    }
+  }
+}
+
 let score = {user: 0, computer: 0};
+
 const playRound = (userChoice) => {
   let computerChoice = computerChoose();
   switch (userChoice) {
@@ -17,11 +36,13 @@ const playRound = (userChoice) => {
           score.computer++;
           console.log(score);
           updateScore();
+          gameOver();
           return "loss";
         case "scissors":
           score.user++;
           console.log(score);
           updateScore();
+          gameOver();
           return "win";
       }
       break;
@@ -31,6 +52,7 @@ const playRound = (userChoice) => {
           score.user++;
           console.log(score);
           updateScore();
+          gameOver();
           return "win";
         case "paper":
           return "tie";
@@ -38,6 +60,7 @@ const playRound = (userChoice) => {
           score.computer++;
           console.log(score);
           updateScore();
+          gameOver();
           return "loss";
       }
       break;
@@ -47,11 +70,13 @@ const playRound = (userChoice) => {
           score.computer++;
           console.log(score);
           updateScore();
+          gameOver();
           return "loss";
         case "paper":
           score.user++;
           console.log(score);
           updateScore();
+          gameOver();
           return "win";
         case "scissors":
           return "tie";
@@ -63,7 +88,6 @@ const playRound = (userChoice) => {
   
 };
 const container = document.querySelector("#container");
-
 
 const rockButton = document.querySelector("#rockButton");
 rockButton.addEventListener('click', () => playRound("rock"));
