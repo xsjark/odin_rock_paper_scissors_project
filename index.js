@@ -1,7 +1,12 @@
 const choices = ["rock", "paper", "scissors"];
 const computerChoose = () =>
   choices[Math.floor(Math.random() * choices.length)];
-const playRound = (userChoice, round) => {
+const updateScore = () => {
+  document.getElementById("userScore").innerHTML = score.user;
+  document.getElementById("computerScore").innerHTML = score.computer;
+}
+let score = {user: 0, computer: 0};
+const playRound = (userChoice) => {
   let computerChoice = computerChoose();
   switch (userChoice) {
     case "rock":
@@ -9,26 +14,44 @@ const playRound = (userChoice, round) => {
         case "rock":
           return "tie";
         case "paper":
+          score.computer++;
+          console.log(score);
+          updateScore();
           return "loss";
         case "scissors":
+          score.user++;
+          console.log(score);
+          updateScore();
           return "win";
       }
       break;
     case "paper":
       switch (computerChoice) {
         case "rock":
+          score.user++;
+          console.log(score);
+          updateScore();
           return "win";
         case "paper":
           return "tie";
         case "scissors":
+          score.computer++;
+          console.log(score);
+          updateScore();
           return "loss";
       }
       break;
     case "scissors":
       switch (computerChoice) {
         case "rock":
+          score.computer++;
+          console.log(score);
+          updateScore();
           return "loss";
         case "paper":
+          score.user++;
+          console.log(score);
+          updateScore();
           return "win";
         case "scissors":
           return "tie";
@@ -37,40 +60,20 @@ const playRound = (userChoice, round) => {
     default:
       console.log("Enter rock, paper or scissors");
   }
+  
 };
+const container = document.querySelector("#container");
 
-const game = () => {
-  let i = 0;
-  let userScore = 0;
-  let computerScore = 0;
-  while (i < 5) {
-    let userPrompt = prompt("Rock, paper or scissors?");
-    userPrompt;
-    if (
-      userPrompt == "rock" ||
-      userPrompt == "paper" ||
-      userPrompt == "scissors"
-    ) {
-      switch (playRound(userPrompt, i + 1)) {
-        case "win":
-          userScore += 1;
-          break;
-        case "loss":
-          computerScore += 1;
-          break;
-      }
-      alert(`user: ${userScore} computer: ${computerScore}`);
-      i++;
-    } 
-    if(userPrompt==null){
-        break;
-    } else {
-      alert("Enter rock, paper or scissors");
-    }
-  }
-  if (userScore > computerScore) {
-    alert(`You won ${userScore}/${computerScore}`);
-  } else {
-    alert(`You lost ${userScore}/${computerScore}`);
-  }
-};
+
+const rockButton = document.querySelector("#rockButton");
+rockButton.addEventListener('click', () => playRound("rock"));
+
+const paperButton = document.querySelector("#paperButton");
+paperButton.addEventListener('click', () => playRound("paper"));
+
+const scissorsButton = document.querySelector("#scissorsButton");
+scissorsButton.addEventListener('click', () => playRound("scissors"));
+
+
+
+
