@@ -87,6 +87,7 @@ const playRound = (userChoice) => {
   }
   
 };
+
 const container = document.querySelector("#container");
 
 const rockButton = document.querySelector("#rockButton");
